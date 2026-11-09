@@ -75,11 +75,11 @@ const HAPPY_CUSTOMERS: CustomerStory[] = [
     id: 'cust-6',
     names: 'Murugesan, Shanthi & Family',
     location: 'Tirunelveli & Madurai',
-    destination: 'Alleppey Backwaters • Houseboat Cruise, Kerala',
-    badge: 'Backwater Houseboat',
+    destination: 'Kodaikanal & Vagamon • Misty Hilltop Viewpoint Tour',
+    badge: 'Misty Hilltop Tour',
     quote:
-      'Cruising through palm-fringed backwaters on a private luxury houseboat with hot Kerala meals. Truly five-star experience with Six Wheels!',
-    image: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=800&q=85',
+      'Panoramic mountain views, cool valley breeze, and wonderful hospitality. Mohan took care of our entire family with utmost warmth!',
+    image: '/customers/hilltop-viewpoint-group.jpg',
     rating: 5,
   },
 ];
