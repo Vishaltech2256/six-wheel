@@ -175,10 +175,10 @@ export const PackageModal: React.FC<PackageModalProps> = ({
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-50 flex flex-col bg-navy-950/85 backdrop-blur-md animate-in fade-in duration-300"
+      className="fixed inset-0 z-50 flex flex-col bg-ivory animate-in fade-in duration-300"
     >
       {/* Sticky Top Header Navigation */}
-      <header className="sticky top-0 z-50 flex items-center justify-between px-4 sm:px-8 py-3.5 bg-navy-950/95 border-b border-gold/25 backdrop-blur-md shadow-lg">
+      <header className="sticky top-0 z-50 flex items-center justify-between px-4 sm:px-8 py-3.5 bg-navy-950 border-b border-gold/30 shadow-md">
         <div className="flex items-center gap-3">
           <Image
             src="/logo.png"
@@ -207,21 +207,20 @@ export const PackageModal: React.FC<PackageModalProps> = ({
           onClick={onClose}
           type="button"
           aria-label="Close Package Details"
-          className="group inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-gold hover:text-navy border border-white/20 hover:border-gold text-ivory text-xs font-semibold uppercase tracking-wider transition-all duration-200"
+          className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold hover:bg-gold-hover text-navy text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-md shadow-gold/20"
         >
-          <span className="hidden sm:inline">Close</span>
-          <X size={16} className="group-hover:rotate-90 transition-transform duration-200" />
+          <span>Close</span>
+          <X size={16} className="group-hover:rotate-90 transition-transform duration-200 stroke-[2.5]" />
         </button>
       </header>
 
-      {/* Scrollable Package Container */}
+      {/* Scrollable Package Container - 100% Full Width Edge-to-Edge */}
       <div
         ref={scrollContainerRef}
-        className="flex-1 overflow-y-auto overscroll-contain bg-navy-950"
+        className="flex-1 overflow-y-auto overscroll-contain bg-ivory w-full"
       >
-        <div className="max-w-5xl mx-auto my-0 sm:my-8 sm:px-4">
-          <div className="bg-ivory text-ink rounded-none sm:rounded-2xl overflow-hidden shadow-2xl border-0 sm:border border-gold/30">
-            {packageId === 'munnar' ? (
+        <div className="w-full bg-ivory text-ink">
+          {packageId === 'munnar' ? (
               <div ref={containerRef} className="munnar-package-scope">
                 <style jsx global>{`
                   .munnar-package-scope {
@@ -264,7 +263,7 @@ export const PackageModal: React.FC<PackageModalProps> = ({
                     position: relative;
                     background: radial-gradient(120% 90% at 85% 10%, #33305e 0%, var(--pkg-navy-2) 45%, var(--pkg-navy) 100%);
                     color: #fff;
-                    padding: 90px 0 130px;
+                    padding: 120px 0 160px;
                     overflow: hidden;
                   }
 
@@ -401,7 +400,7 @@ export const PackageModal: React.FC<PackageModalProps> = ({
                   .munnar-package-scope .info {
                     position: relative;
                     z-index: 3;
-                    margin-top: -50px;
+                    margin-top: -62px;
                   }
 
                   .munnar-package-scope .info-grid {
@@ -1509,6 +1508,6 @@ export const PackageModal: React.FC<PackageModalProps> = ({
           </div>
         </div>
       </div>
-    </div>
   );
 };
+
