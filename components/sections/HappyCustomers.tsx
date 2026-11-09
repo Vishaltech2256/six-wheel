@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Star, Heart, CheckCircle2, MessageCircle } from 'lucide-react';
+import { Star, Heart, CheckCircle2, MessageCircle, ArrowRight, MapPin } from 'lucide-react';
 
 interface CustomerStory {
   id: string;
@@ -13,6 +13,7 @@ interface CustomerStory {
   quote: string;
   image: string;
   rating: number;
+  packageLink?: string;
 }
 
 const HAPPY_CUSTOMERS: CustomerStory[] = [
@@ -26,6 +27,7 @@ const HAPPY_CUSTOMERS: CustomerStory[] = [
       'Mohan arranged our Munnar off-road jeep safari through the tea plantations and sunrise point. Unbelievable adventure and memories!',
     image: '/customers/tea-estate-jeep.jpg',
     rating: 5,
+    packageLink: '#package-munnar',
   },
   {
     id: 'cust-2',
@@ -37,6 +39,7 @@ const HAPPY_CUSTOMERS: CustomerStory[] = [
       'Coordinating a fleet of 4x4 jeeps for 35 of us to the highest peak viewpoint was handled with top-notch safety and perfection!',
     image: '/customers/mountain-jeep-safari.jpg',
     rating: 5,
+    packageLink: '#package-munnar',
   },
   {
     id: 'cust-3',
@@ -48,6 +51,7 @@ const HAPPY_CUSTOMERS: CustomerStory[] = [
       'Weekend trip with college friends to Wonderla! Mohan organized our private transit and tickets seamlessly. Full day of pure thrills!',
     image: '/customers/wonderla-group.jpg',
     rating: 5,
+    packageLink: '#package-munnar',
   },
   {
     id: 'cust-4',
@@ -59,6 +63,7 @@ const HAPPY_CUSTOMERS: CustomerStory[] = [
       'Traveling with 28 family members from kids to grandparents in a luxury AC coach. Punctual driver, smooth journey, and zero hassle!',
     image: '/customers/luxury-bus-group.jpg',
     rating: 5,
+    packageLink: '#package-munnar',
   },
   {
     id: 'cust-5',
@@ -70,6 +75,7 @@ const HAPPY_CUSTOMERS: CustomerStory[] = [
       'Row boating on the lake, cool forest walks, and homemade chocolates! Mohan took care of all meals, cottages, and transport flawlessly.',
     image: '/customers/pine-forest-group.jpg',
     rating: 5,
+    packageLink: '#package-munnar',
   },
   {
     id: 'cust-6',
@@ -81,6 +87,7 @@ const HAPPY_CUSTOMERS: CustomerStory[] = [
       'Panoramic mountain views, cool valley breeze, and wonderful hospitality. Mohan took care of our entire family with utmost warmth!',
     image: '/customers/hilltop-viewpoint-group.jpg',
     rating: 5,
+    packageLink: '#package-munnar',
   },
 ];
 
@@ -163,9 +170,23 @@ export const HappyCustomers: React.FC = () => {
                   {customer.destination}
                 </p>
 
-                <p className="text-xs text-ivory/90 font-serif italic line-clamp-3 leading-relaxed pt-1 border-t border-white/10">
+                <p className="text-xs text-ivory/90 font-serif italic line-clamp-2 leading-relaxed pt-1 border-t border-white/10">
                   &ldquo;{customer.quote}&rdquo;
                 </p>
+
+                {/* Package CTA Button */}
+                <div className="pt-1">
+                  <a
+                    href={customer.packageLink || '#package-munnar'}
+                    className="inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-full bg-gold hover:bg-gold-hover text-navy text-[11px] font-bold uppercase tracking-wider transition-all duration-200 shadow-md shadow-gold/20 hover:scale-[1.02]"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                  >
+                    <span>Package</span>
+                    <ArrowRight size={13} className="stroke-[2.5]" />
+                  </a>
+                </div>
               </div>
             </div>
           ))}
