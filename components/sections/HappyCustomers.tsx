@@ -73,28 +73,6 @@ const HAPPY_CUSTOMERS: CustomerStory[] = [
   },
   {
     id: 'cust-6',
-    names: 'Aravind & Anitha',
-    location: 'Erode',
-    destination: 'Wayanad • Chembra Peak & Waterfalls, Kerala',
-    badge: 'Rainforest Escape',
-    quote:
-      'Private treehouse resort in the middle of spice plantations and scenic bamboo woods. Six Wheels Holidays handled every detail flawlessly.',
-    image: 'https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=800&q=85',
-    rating: 5,
-  },
-  {
-    id: 'cust-7',
-    names: 'Ramesh Kumar & Priya',
-    location: 'Madurai',
-    destination: 'Kodaikanal • Misty Lake & Pine Valley, Tamil Nadu',
-    badge: 'Pine Valley Retreat',
-    quote:
-      'Pillar Rocks, row boating on the serene lake, and Coaker’s walk in the mist. The vehicle was clean and driver was very polite.',
-    image: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=800&q=85',
-    rating: 5,
-  },
-  {
-    id: 'cust-8',
     names: 'Murugesan & Shanthi',
     location: 'Tirunelveli',
     destination: 'Tirupati & Tirumala Sacred Hills • Andhra Pradesh',
@@ -102,28 +80,6 @@ const HAPPY_CUSTOMERS: CustomerStory[] = [
     quote:
       'Peaceful hill darshan, prompt hotel arrangements, and safe mountain driving. Mohan ensured complete peace of mind for our parents.',
     image: 'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=800&q=85',
-    rating: 5,
-  },
-  {
-    id: 'cust-9',
-    names: 'Prasanth & Nithya',
-    location: 'Chennai',
-    destination: 'Varkala Cliff & Kovalam Beach • Kerala',
-    badge: 'Coastal Paradise',
-    quote:
-      'Watching the sunset from the cliffside resort with sea breeze and fresh seafood. Six Wheels Holidays made our anniversary unforgettable!',
-    image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=85',
-    rating: 5,
-  },
-  {
-    id: 'cust-10',
-    names: 'Dr. Senthil Kumar & Kavitha',
-    location: 'Thanjavur',
-    destination: 'Kanyakumari • Ocean Confluence, Tamil Nadu',
-    badge: "Land's End Horizon",
-    quote:
-      'Witnessing the sunrise over the three seas from our beachfront suite was magical. Punctual airport transfers and great care.',
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=85',
     rating: 5,
   },
 ];
