@@ -45,9 +45,9 @@ const HAPPY_CUSTOMERS: CustomerStory[] = [
   {
     id: 'cust-3',
     names: 'Vignesh, Deepa & Friends',
-    location: 'Bangalore & Hosur',
-    destination: 'Wonderla Resort & Amusement Tour • Bangalore',
-    badge: 'Theme Park Getaway',
+    location: 'Coimbatore',
+    destination: 'Vagamon, Varkala & Wonderla • 3 Days College IV Tour',
+    badge: 'College IV · 3 Days',
     quote:
       'Weekend trip with college friends to Wonderla! Mohan organized our private transit and tickets seamlessly. Full day of pure thrills!',
     image: '/customers/wonderla-group.jpg',
