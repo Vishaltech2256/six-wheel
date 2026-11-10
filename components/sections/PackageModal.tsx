@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { X, Phone, MessageCircle } from 'lucide-react';
 import { CUSTOMER_PACKAGES } from '@/data/customerPackages';
@@ -18,8 +18,14 @@ export const PackageModal: React.FC<PackageModalProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [currentPackageId, setCurrentPackageId] = useState<string | null>(packageId);
 
-  const packageData = packageId ? CUSTOMER_PACKAGES[packageId] : undefined;
+  useEffect(() => {
+    setCurrentPackageId(packageId);
+  }, [packageId]);
+
+  const activeId = currentPackageId || packageId;
+  const packageData = activeId ? CUSTOMER_PACKAGES[activeId] : undefined;
 
   // Close on Escape & lock body scroll
   useEffect(() => {
@@ -186,13 +192,18 @@ export const PackageModal: React.FC<PackageModalProps> = ({
         window.removeEventListener('resize', build);
       }
     };
-  }, [packageId, packageData]);
+  }, [activeId, packageData]);
 
   if (!packageId) return null;
 
   const scrollToTarget = (elementId: string) => {
     const el = containerRef.current?.querySelector(`#${elementId}`);
     el?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleSwitchRoute = (nextId: string) => {
+    setCurrentPackageId(nextId);
+    scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -202,7 +213,7 @@ export const PackageModal: React.FC<PackageModalProps> = ({
       className="fixed inset-0 z-50 flex flex-col bg-ivory animate-in fade-in duration-300"
     >
       {/* Sticky Top Header Navigation */}
-      <header className="sticky top-0 z-50 flex items-center justify-between px-4 sm:px-8 py-3.5 bg-navy-950 border-b border-gold/30 shadow-md">
+      <header className="sticky top-0 z-50 flex flex-wrap items-center justify-between gap-3 px-4 sm:px-8 py-3.5 bg-navy-950 border-b border-gold/30 shadow-md">
         <div className="flex items-center gap-3">
           <Image
             src="/logo.png"
@@ -227,18 +238,39 @@ export const PackageModal: React.FC<PackageModalProps> = ({
           </div>
         </div>
 
-        <button
-          onClick={onClose}
-          type="button"
-          aria-label="Close Package Details"
-          className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold hover:bg-gold-hover text-navy text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-md shadow-gold/20"
-        >
-          <span>Close</span>
-          <X
-            size={16}
-            className="group-hover:rotate-90 transition-transform duration-200 stroke-[2.5]"
-          />
-        </button>
+        <div className="flex items-center gap-2.5">
+          {packageData?.alternatePackageId && packageData.selfSwitchLabel && packageData.alternateLabel && (
+            <div className="hidden md:flex items-center gap-1.5 bg-white/5 border border-gold/30 rounded-full p-1">
+              <button
+                type="button"
+                onClick={() => handleSwitchRoute(packageData.id)}
+                className="px-3 py-1 rounded-full text-[11px] font-semibold bg-gold text-navy transition-all"
+              >
+                {packageData.selfSwitchLabel}
+              </button>
+              <button
+                type="button"
+                onClick={() => handleSwitchRoute(packageData.alternatePackageId!)}
+                className="px-3 py-1 rounded-full text-[11px] font-medium text-ivory/80 hover:text-gold transition-all"
+              >
+                {packageData.alternateLabel}
+              </button>
+            </div>
+          )}
+
+          <button
+            onClick={onClose}
+            type="button"
+            aria-label="Close Package Details"
+            className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold hover:bg-gold-hover text-navy text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-md shadow-gold/20"
+          >
+            <span>Close</span>
+            <X
+              size={16}
+              className="group-hover:rotate-90 transition-transform duration-200 stroke-[2.5]"
+            />
+          </button>
+        </div>
       </header>
 
       {/* Scrollable Package Container - 100% Full Width Edge-to-Edge */}
@@ -248,7 +280,7 @@ export const PackageModal: React.FC<PackageModalProps> = ({
       >
         <div className="w-full bg-ivory text-ink">
           {packageData ? (
-            <div ref={containerRef} className="munnar-package-scope">
+            <div key={packageData.id} ref={containerRef} className="munnar-package-scope">
               <style jsx global>{`
                 .munnar-package-scope {
                   --pkg-navy: #0a1226;
@@ -1184,6 +1216,48 @@ export const PackageModal: React.FC<PackageModalProps> = ({
                       <span>{packageData.titleHighlight}</span>
                     </h1>
                     <p className="lead">{packageData.lead}</p>
+
+                    {(packageData.pricePerHead || packageData.groupCount || packageData.programDate) && (
+                      <div className="mt-5 flex flex-wrap gap-2.5">
+                        {packageData.pricePerHead && (
+                          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-sm bg-gold/15 border border-gold/50 text-[#e3c27a] text-xs font-semibold tracking-wider uppercase">
+                            Per Head: <strong className="text-white">{packageData.pricePerHead}</strong>
+                          </span>
+                        )}
+                        {packageData.groupCount && (
+                          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-sm bg-white/10 border border-white/25 text-white/90 text-xs font-semibold tracking-wider uppercase">
+                            Count: <strong className="text-[#e3c27a]">{packageData.groupCount}</strong>
+                          </span>
+                        )}
+                        {packageData.programDate && (
+                          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-sm bg-white/10 border border-white/25 text-white/90 text-xs font-semibold tracking-wider uppercase">
+                            {packageData.programDate}
+                          </span>
+                        )}
+                      </div>
+                    )}
+
+                    {packageData.alternatePackageId &&
+                      packageData.selfSwitchLabel &&
+                      packageData.alternateLabel && (
+                        <div className="mt-5 flex md:hidden flex-wrap gap-2">
+                          <button
+                            type="button"
+                            onClick={() => handleSwitchRoute(packageData.id)}
+                            className="px-3 py-1.5 rounded-full text-[11px] font-semibold bg-gold text-navy"
+                          >
+                            {packageData.selfSwitchLabel}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleSwitchRoute(packageData.alternatePackageId!)}
+                            className="px-3 py-1.5 rounded-full text-[11px] font-medium bg-white/10 border border-gold/40 text-ivory"
+                          >
+                            {packageData.alternateLabel}
+                          </button>
+                        </div>
+                      )}
+
                     <div className="hero-cta">
                       <a
                         className="btn gold"
